@@ -1,0 +1,22 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+/* navbar */
+.navbar-default {
+    background-color: #3497da;
+    border-color: #E7E7E7;
+}
+/* buttons, select, dropdown */
+.btn-group a.btn {
+    margin-right: 5px;
+}
+/* pagination */
+.pagination {
+    margin: 0;
+}
+/* panel */
+
+.panel-footer {
+     background-color: #FFF; 
+}  

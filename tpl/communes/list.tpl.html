@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{#list_of_communes#|ucfirst}</h3>
+			</div>
+			<div class="panel-body">
+				{if not empty($communes)}<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>{#commune#|ucfirst}</th>
+						<th colspan="2">{#actions#|ucfirst}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach from=$communes item=commune}
+					<tr>
+						<td width="80%"  align="left">{$commune->name}</td>
+						<td width="10%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-success" href="communes.php?action=edit&cp={$commune->cp}" title="{#edit#|ucfirst}">{#edit#|ucfirst}</a></td>
+						<td width="10%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-danger" href="communes.php?action=delete&cp={$commune->cp}" title="{#delete#|ucfirst}" onclick="return confirm('{#do_you_really_want_to_delete_this_commune#|ucfirst} ?')">{#delete#|ucfirst}</a></td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			{else}<h4>{#no_commune#}</h4>{/if}
+			<div class="panel-footer">
+				<ul class="pagination">
+					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
+					<li{if $btn.active} class="active" {/if}><a href="communes.php?{$btn.link}">{$btn.label}</a></li>
+						{/foreach}{/if}
+				</ul>
+				<div class="btn-group pull-right">
+					<a href="communes.php?action=add" class="btn btn-primary">{#add_a_commune#|ucfirst}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

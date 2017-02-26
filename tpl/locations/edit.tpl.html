@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{if $location->id >0}{#edit_a_location#|ucfirst}{else}{#add_a_location#|ucfirst}{/if}</h3>
+			</div>
+			<div class="panel-body">
+				<form role="form" name="form_param" method="post" action="locations.php">
+					<input name="id" type="hidden" value="{$location->id}" />
+					<input name="action" type="hidden" value="save" />
+			 <div class="form-group">
+					<label for="{#uid#}">{#uid#|ucfirst}</label>
+					<input class="form-control" type="text" name="uid" value="{$location->uid}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#title#}">{#title#|ucfirst}</label>
+					<input class="form-control" type="text" name="title" value="{$location->title}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#url#}">{#url#|ucfirst}</label>
+					<input class="form-control" type="text" name="url" value="{$location->url}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#image#}">{#image#|ucfirst}</label>
+					<input class="form-control" type="text" name="image" value="{$location->image}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#city#}">{#city#|ucfirst}</label>
+					<input class="form-control" type="text" name="city" value="{$location->city}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#loyer#}">{#loyer#|ucfirst}</label>
+					<input class="form-control" type="text" name="loyer" value="{$location->loyer}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#surface#}">{#surface#|ucfirst}</label>
+					<input class="form-control" type="text" name="surface" value="{$location->surface}" />
+				</div>
+
+					<div align="right">
+						<!--<button type="cancel" class="btn btn-default">{#cancel#|ucfirst}</button>-->
+						<button type="submit" class="btn btn-primary">{#save#|ucfirst}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
