@@ -37,6 +37,7 @@ foreach ($ads as $ad) {
                         "loyer" =>  $parser->extractLoyer($rawad), 
                         "surface" => $parser->extractSurface($rawad),
                         "cp" => $parser->extractCp($rawad),
+                        "ville" => $parser->extractVille($rawad),
                         "status" =>1 
 
                         );

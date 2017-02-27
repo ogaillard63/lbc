@@ -145,8 +145,17 @@ class Parser
   {
     preg_match('/<span class="value" itemprop="address">(.*?)<\/span>/s', $string, $match);
     if (isset($match[1])) {
-      preg_match("/[0-9]{2,}/", $match[1], $output);
-      return isset($output[0])?trim($output[0]):false;
+      preg_match("/(.*?)\s?([0-9]{5}?)/", $match[1], $output);
+      return isset($output[2])?trim($output[2]):false;
+    }
+    return false;
+  }
+    public function extractVille($string)
+  {
+    preg_match('/<span class="value" itemprop="address">(.*?)<\/span>/s', $string, $match);
+    if (isset($match[1])) {
+      preg_match("/(.*?)\s?([0-9]{5}?)/", $match[1], $output);
+      return isset($output[1])?trim(utf8_encode($output[1])):false;
     }
     return false;
   }

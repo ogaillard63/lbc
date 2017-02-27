@@ -31,7 +31,8 @@
 					<tr>
 						<th>{#title#|ucfirst}</th>
 						<th>{#image#|ucfirst}</th>
-						<th>{#commune#|ucfirst}</th>
+						<th>{#cp#|ucfirst}</th>
+						<th>{#ville#|ucfirst}</th>
 						<th>{#loyer#|ucfirst}</th>
 						<th>{#surface#|ucfirst}</th>
 						<th>{#actions#|ucfirst}</th>
@@ -42,7 +43,8 @@
 					<tr>
 						<td align="left"><a href="{$location->url}" target="_blank">{$location->title}</a></td>
 						<td align="left"><img src="{$location->image}" width="200"></td>
-						<td align="left"><a href="https://www.google.fr/maps/place/{$location->cp}" target="_blank">{$location->commune->name}</a></td>
+						<td align="left"><a href="https://www.google.fr/maps/place/{$location->cp}" target="_blank">{$location->cp}</a></td>
+						<td align="left"><a href="https://www.google.fr/maps/place/{$location->cp}" target="_blank">{$location->ville}</a></td>
 						<td align="left">{$location->loyer}</td>
 						<td align="left">{$location->surface}</td>
 						<td width="1%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-danger" href="locations.php?action=delete&id={$location->id}" title="{#delete#|ucfirst}" onclick="return confirm('{#do_you_really_want_to_delete_this_location#|ucfirst} ?')">{#delete#|ucfirst}</a></td>

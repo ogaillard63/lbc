@@ -50,10 +50,10 @@ class LocationManager {
 
 		$q->execute();
 		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
-			$location = new Location($data);
-			$commune_manager = new CommuneManager($this->bdd);
-			$location->setCommune($commune_manager->getCommune($location->getCp()));
-			$locations[] = $location;
+			$locations[] = new Location($data);
+			// $commune_manager = new CommuneManager($this->bdd);
+			// $location->setCommune($commune_manager->getCommune($location->getCp()));
+			// $locations[] = $location;
 		}
 		return $locations;
 	}
@@ -70,14 +70,14 @@ class LocationManager {
 	public function searchLocations($query) {
 		$locations = array();
 		$q = $this->bdd->prepare('SELECT * FROM locations 
-			WHERE status = "1"  AND (title LIKE :query OR cp LIKE :query)');
+			WHERE status = "1"  AND (title LIKE :query OR ville LIKE :query OR cp LIKE :query)');
 		$q->bindValue(':query', '%'.$query.'%', PDO::PARAM_STR);
 		$q->execute();
 		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
-			$location = new Location($data);
-			$commune_manager = new CommuneManager($this->bdd);
-			$location->setCommune($commune_manager->getCommune($location->getCp()));
-			$locations[] = $location;
+			$locations[] = new Location($data);
+			// $commune_manager = new CommuneManager($this->bdd);
+			// $location->setCommune($commune_manager->getCommune($location->getCp()));
+			// $locations[] = $location;
 		}
 		return $locations;
 	}
@@ -113,9 +113,9 @@ class LocationManager {
 	public function saveLocation(Location $location) {
 		var_dump($location);
 		if ($location->getId() == -1) {
-			$q = $this->bdd->prepare('INSERT INTO locations SET uid = :uid, addate = :addate, title = :title, url = :url, image = :image, cp = :cp, loyer = :loyer, surface = :surface, status = :status');
+			$q = $this->bdd->prepare('INSERT INTO locations SET uid = :uid, addate = :addate, title = :title, url = :url, image = :image, cp = :cp, ville = :ville, loyer = :loyer, surface = :surface, status = :status');
 		} else {
-			$q = $this->bdd->prepare('UPDATE locations SET uid = :uid, addate = :addate	, title = :title, url = :url, image = :image, cp = :cp, loyer = :loyer, surface = :surface, status = :status WHERE id = :id');
+			$q = $this->bdd->prepare('UPDATE locations SET uid = :uid, addate = :addate	, title = :title, url = :url, image = :image, cp = :cp, ville = :ville, loyer = :loyer, surface = :surface, status = :status WHERE id = :id');
 			$q->bindValue(':id', $location->getId(), PDO::PARAM_INT);
 		}
 		$q->bindValue(':uid', $location->getUid(), PDO::PARAM_STR);
@@ -124,6 +124,7 @@ class LocationManager {
 		$q->bindValue(':url', $location->getUrl(), PDO::PARAM_STR);
 		$q->bindValue(':image', $location->getImage(), PDO::PARAM_STR);
 		$q->bindValue(':cp', $location->getCp(), PDO::PARAM_STR);
+		$q->bindValue(':ville', $location->getVille(), PDO::PARAM_STR);
 		$q->bindValue(':loyer', $location->getLoyer(), PDO::PARAM_INT);
 		$q->bindValue(':surface', $location->getSurface(), PDO::PARAM_INT);
 		$q->bindValue(':status', $location->getStatus(), PDO::PARAM_INT);

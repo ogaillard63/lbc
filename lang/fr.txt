@@ -34,6 +34,7 @@ the_user_has_been_saved = l'utilisateur a été enregistré.
 the_user_has_been_deleted = l'utilisateur a été effacé.
 do_you_really_want_to_delete_this_user = voulez-vous vraiment effacer cet utilisateur
 passwords_dont_match = les mots de passe saisies sont differents ! 
+
 #locations
 location = location
 locations = locations
@@ -41,7 +42,8 @@ uid = uid
 title = title
 url = url
 image = image
-city = city
+ville = ville
+cp = cp
 loyer = loyer
 surface = surface
 list_of_locations = liste des locations

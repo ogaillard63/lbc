@@ -14,7 +14,7 @@ class Location {
 	public $url;
 	public $image;
 	public $cp;
-	public $commune;
+	public $ville;
 	public $loyer;
 	public $surface;
 	public $status;
@@ -89,12 +89,12 @@ class Location {
 	public function getCp() {
 		return $this->cp;
 	}
-	// commune;
-	public function setCommune($commune) {
-		$this->commune = $commune;
+	// ville;
+	public function setVille($ville) {
+		$this->ville = $ville;
 	}
-	public function getCommune() {
-		return $this->commune;
+	public function getVille() {
+		return $this->ville;
 	}
 	// loyer;
 	public function setLoyer($loyer) {
