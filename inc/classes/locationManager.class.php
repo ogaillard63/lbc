@@ -50,10 +50,11 @@ class LocationManager {
 
 		$q->execute();
 		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
-			$locations[] = new Location($data);
-			// $commune_manager = new CommuneManager($this->bdd);
-			// $location->setCommune($commune_manager->getCommune($location->getCp()));
-			// $locations[] = $location;
+			$location = new Location($data);
+			$commune_manager = new CommuneManager($this->bdd);
+			$commune = $commune_manager->searchCommune($location->getCp(), $location->getVille());
+			if (is_object($commune)) $location->setCommune($commune);
+			$locations[] = $location;
 		}
 		return $locations;
 	}
@@ -70,23 +71,40 @@ class LocationManager {
 	public function searchLocations($query) {
 		$locations = array();
 		$q = $this->bdd->prepare('SELECT * FROM locations 
-			WHERE status = "1"  AND (title LIKE :query OR ville LIKE :query OR cp LIKE :query)');
+			WHERE status = "1" AND (title LIKE :query OR ville LIKE :query OR cp LIKE :query)');
 		$q->bindValue(':query', '%'.$query.'%', PDO::PARAM_STR);
 		$q->execute();
 		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
-			$locations[] = new Location($data);
-			// $commune_manager = new CommuneManager($this->bdd);
-			// $location->setCommune($commune_manager->getCommune($location->getCp()));
-			// $locations[] = $location;
+			$location = new Location($data);
+			$commune_manager = new CommuneManager($this->bdd);
+			$commune = $commune_manager->searchCommune($location->getCp(), $location->getVille());
+			if (is_object($commune)) $location->setCommune($commune);
+			$locations[] = $location;
 		}
 		return $locations;
 	}
-
+	/**
+	* Recherche les locations pour une ville
+	*/
+	public function searchLocationsByCommune($commune) {
+		$locations = array();
+		$q = $this->bdd->prepare('SELECT * FROM locations WHERE status = "1" AND ville LIKE :commune');
+		$q->bindValue(':commune', $commune, PDO::PARAM_STR);
+		$q->execute();
+		while ($data = $q->fetch(PDO::FETCH_ASSOC)) {
+			$location = new Location($data);
+			$commune_manager = new CommuneManager($this->bdd);
+			$commune = $commune_manager->searchCommune($location->getCp(), $location->getVille());
+			if (is_object($commune)) $location->setCommune($commune);
+			$locations[] = $location;
+		}
+		return $locations;
+	}
 	/**
 	 * Retourne le nombre max de locations
 	 */
 	public function getMaxLocations() {
-		$q = $this->bdd->prepare('SELECT count(1) FROM locations');
+		$q = $this->bdd->prepare('SELECT count(1) FROM locations WHERE status = "1"');
 		$q->execute();
 		return intval($q->fetch(PDO::FETCH_COLUMN));
 	}

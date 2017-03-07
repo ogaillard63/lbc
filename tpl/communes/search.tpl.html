@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{#search#|ucfirst}</h3>
+			</div>
+			<div class="panel-body">
+				<form role="form" name="form_param" method="post" action="communes.php" class="search_form">
+					<div class="input-group">
+						<input class="form-control" type="hidden" name="action" value="search_results" />
+						<input class="form-control" type="text" name="query" value="{if not empty($query)}{$query}{/if}" />
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary">{#search#|ucfirst}</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		{if not empty($communes)}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{#search_results#|ucfirst}</h3>
+				<div class="actions pull-right">
+					<i class="fa fa-chevron-down"></i>
+					<i class="fa fa-times"></i>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>{#cp#|ucfirst}</th>
+							<th>{#name#|ucfirst}</th>
+							<th>{#lat#|ucfirst}</th>
+							<th>{#lon#|ucfirst}</th>
+							<th>{#distance#|ucfirst}</th>
+							<th>{#duration#|ucfirst}</th>
+							<th>{#actions#|ucfirst}</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						{foreach from=$communes item=commune}
+						<tr>	
+							<td align="left">{$commune->cp|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td align="left">{$commune->name|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td align="left">{$commune->lat|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td align="left">{$commune->lon|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td align="left">{$commune->distance|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td align="left">{$commune->duration|replace:"{$query}":"<strong>{$query}</strong>"}</td>
+							<td width="1%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-success" href="communes.php?action=edit&id={$commune->id}" title="{#edit#|ucfirst}">{#edit#|ucfirst}</a></td>
+						</tr>
+						{/foreach}
+					</tbody>
+				</table>
+				<ul class="pagination pull-left">
+					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
+					<li{if $btn.active} class="active" {/if}><a href="communes.php?{$btn.link}">{$btn.label}</a></li>
+						{/foreach}{/if}
+				</ul>
+			</div>
+		</div>{/if}
+	</div>
+</div>

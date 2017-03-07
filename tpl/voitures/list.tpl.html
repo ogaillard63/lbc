@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="voitures.php?action=search" class="btn btn-xs btn-success pull-right">{#search#|ucfirst}</a>
+				<h3 class="panel-title">{#list_of_voitures#|ucfirst}</h3>
+			</div>
+			<div class="panel-body">
+				{if not empty($voitures)}
+				 <div class="row">
+            {foreach from=$voitures item=voiture}
+			<div class="col-md-4">
+				<div class="portfolio-item">
+					<h4>
+						<a href="{$voiture->url}" target="_blank">{$voiture->title}</a>
+					</h4>
+					<p class="thumb">
+						<a href="{$voiture->url}" target="_blank">
+							{if $voiture->image}<img src="{$voiture->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
+						</a>
+					</p>
+					<p><a href="https://www.google.fr/maps/place/{$voiture->cp}+{$voiture->ville}" target="_blank">{$voiture->ville}</a></p>
+					<p><span class="label label-danger">{$voiture->prix|number_format:0:".":" "}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$voiture->marque}&nbsp;{$voiture->modele}</span>&nbsp;<span class="label label-warning">{$voiture->annee}</span></p>
+					<p><span class="label" style="background-color: darkslateblue">{$voiture->km}</span>&nbsp;<span class="label label-primary">{$voiture->carburant}</span>&nbsp;<span class="label label-info">{$voiture->bv}</span></p>
+					<p>{$voiture->addate|date_format:"%d/%m/%Y %H:%M"}<a href="voitures.php?action=delete&id={$voiture->id}&page={$page}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
+            	</div>
+            </div>
+           {if $voiture@iteration is div by 3}</div>
+		   <div class="row">{/if}
+		   {/foreach}
+        </div>
+			{else}<h4>{#no_voiture#}</h4>{/if}
+			<div class="panel-footer">
+				<ul class="pagination">
+					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
+					<li{if $btn.active} class="active" {/if}><a href="voitures.php?{$btn.link}">{$btn.label}</a></li>
+						{/foreach}{/if}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

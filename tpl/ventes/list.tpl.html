@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="ventes.php?action=search" class="btn btn-xs btn-success pull-right">{#search#|ucfirst}</a>
+				<h3 class="panel-title">{#list_of_ventes#|ucfirst}</h3>
+			</div>
+			<div class="panel-body">
+				{if not empty($ventes)}
+				 <div class="row">
+            {foreach from=$ventes item=vente}
+			<div class="col-md-4">
+				<div class="portfolio-item">
+					<h4><a href="{$vente->url}" target="_blank">{$vente->title}</a></h4>
+					<p class="thumb">
+						<a href="{$vente->url}" target="_blank">
+							{if $vente->image}<img src="{$vente->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
+						</a>
+					</p>
+					<p><a href="https://www.google.fr/maps/place/{$vente->cp}+{$vente->ville}" target="_blank">{$vente->commune->name}</a></p>
+					<p><span class="label label-primary">{$vente->prix}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$vente->surface}&nbsp;m2</span>&nbsp;<span class="label label-warning">{($vente->commune->duration/60)|number_format:0:".":" "}&nbsp;min</span>&nbsp;<span class="label label-info">{$vente->commune->distance|number_format:1:".":" "}&nbsp;km</span></p>
+					<p>{$vente->addate|date_format:"%d/%m/%Y %H:%M"}<a href="ventes.php?action=delete&id={$vente->id}&page={$page}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
+            	</div>
+            </div>
+           {if $vente@iteration is div by 3}</div>
+		   <div class="row">{/if}
+		   {/foreach}
+        </div>
+			{else}<h4>{#no_vente#}</h4>{/if}
+			<div class="panel-footer">
+				<ul class="pagination">
+					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
+					<li{if $btn.active} class="active" {/if}><a href="ventes.php?{$btn.link}">{$btn.label}</a></li>
+						{/foreach}{/if}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

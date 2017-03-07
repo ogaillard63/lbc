@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{#search#|ucfirst}</h3>
+			</div>
+			<div class="panel-body">
+				<form role="form" name="form_param" method="post" action="voitures.php" class="search_form">
+					<div class="input-group">
+						<input class="form-control" type="hidden" name="action" value="search_results" />
+						<input class="form-control" type="text" name="query" value="{if not empty($query)}{$query}{/if}" />
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary">{#search#|ucfirst}</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+		{if not empty($voitures)}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{#search_results#|ucfirst}</h3>
+				<div class="actions pull-right">
+					<i class="fa fa-chevron-down"></i>
+					<i class="fa fa-times"></i>
+				</div>
+			</div>
+			<div class="panel-body">
+				 <div class="row">
+            {foreach from=$voitures item=voiture}
+			<div class="col-md-4">
+				<div class="portfolio-item">
+					<h4>
+						<a href="{$voiture->url}" target="_blank">{$voiture->title}</a>
+					</h4>
+					<p class="thumb">
+						<a href="{$voiture->url}" target="_blank">
+							{if $voiture->image}<img src="{$voiture->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
+						</a>
+					</p>
+					<p><a href="https://www.google.fr/maps/place/{$voiture->cp}+{$voiture->ville}" target="_blank">{$voiture->ville}</a></p>
+					<p><span class="label label-danger">{$voiture->prix|number_format:0:".":" "}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$voiture->marque}&nbsp;{$voiture->modele}</span>&nbsp;<span class="label label-warning">{$voiture->annee}</span></p>
+					<p><span class="label" style="background-color: darkslateblue">{$voiture->km}</span>&nbsp;<span class="label label-primary">{$voiture->carburant}</span>&nbsp;<span class="label label-info">{$voiture->bv}</span></p>
+					<p>{$voiture->addate|date_format:"%d/%m/%Y %H:%M"}<a href="voitures.php?action=delete&id={$voiture->id}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
+            	</div>
+            </div>
+           {if $voiture@iteration is div by 3}</div>
+		   <div class="row">{/if}
+		   {/foreach}
+        </div>
+			<div class="panel-footer">
+				<ul class="pagination">
+					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
+					<li{if $btn.active} class="active" {/if}><a href="voitures.php?{$btn.link}">{$btn.label}</a></li>
+						{/foreach}{/if}
+				</ul>
+			</div>
+		</div>
+		</div>{/if}
+	</div>
+</div>

@@ -3,6 +3,8 @@ edit = modifier
 delete = effacer
 cancel = annuler
 save = enregistrer
+cancel = annuler
+return = retour
 actions = actions
 search = rechercher
 search_results = résultats de la recherche
@@ -43,7 +45,9 @@ title = title
 url = url
 image = image
 ville = ville
-cp = cp
+lon = longitude
+lat = latitude
+cp = code postal
 loyer = loyer
 surface = surface
 list_of_locations = liste des locations
@@ -54,3 +58,64 @@ edit_a_location = modifier un location
 the_location_has_been_saved = le location a été enregistré.
 the_location_has_been_deleted = le location a été effacé.
 do_you_really_want_to_delete_this_location = voulez-vous vraiment effacer ce location
+
+
+#ventes
+vente = vente
+ventes = ventes
+uid = uid
+title = title
+url = url
+image = image
+ville = ville
+prix = prix
+surface = surface
+list_of_ventes = liste des ventes
+add_a_vente = ajouter un vente
+delete_a_vente = effacer un vente
+no_vente = aucun vente
+edit_a_vente = modifier un vente
+the_vente_has_been_saved = le vente a été enregistré.
+the_vente_has_been_deleted = le vente a été effacé.
+do_you_really_want_to_delete_this_vente = voulez-vous vraiment effacer ce vente
+
+#voitures
+voiture = voiture
+voitures = voitures
+addate = addate
+uid = uid
+title = title
+url = url
+image = image
+cp = cp
+ville = ville
+marque = marque
+modele = modele
+annee = annee
+km = km
+carburant = carburant
+status = status
+list_of_voitures = liste des voitures
+add_a_voiture = ajouter un voiture
+delete_a_voiture = effacer un voiture
+no_voiture = aucun voiture
+edit_a_voiture = modifier un voiture
+the_voiture_has_been_saved = le voiture a été enregistré.
+the_voiture_has_been_deleted = le voiture a été effacé.
+do_you_really_want_to_delete_this_voiture = voulez-vous vraiment effacer ce voiture
+
+#communes
+name = nom
+cp = code postal
+distance = distance
+duration = durée
+lon = longitude
+lat = latitude
+add_a_commune = ajouter une commune
+delete_a_commune = effacer une commune
+no_commune = aucune commune
+edit_a_commune = modifier une commune
+the_commune_has_been_saved = la commune a été enregistrée.
+the_commune_has_been_deleted = la commune a été effacée.
+do_you_really_want_to_delete_this_commune = voulez-vous vraiment effacer cette commune
+

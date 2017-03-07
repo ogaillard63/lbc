@@ -15,11 +15,10 @@ $uid			= Utils::get_input('uid','post');
 $title			= Utils::get_input('title','post');
 $url			= Utils::get_input('url','post');
 $image			= Utils::get_input('image','post');
-$cp			= Utils::get_input('cp','post');
+$cp				= Utils::get_input('cp','post');
 $loyer			= Utils::get_input('loyer','post');
-$surface			= Utils::get_input('surface','post');
-
-$query			= Utils::get_input('query','post');
+$surface		= Utils::get_input('surface','post');
+$query			= Utils::get_input('query','both');
 
 $location_manager = new LocationManager($bdd);
 
@@ -42,6 +41,16 @@ switch($action) {
 		$smarty->display("main.tpl.html");
 		break;
 
+	case "search_commune" :
+		$commune_manager = new CommuneManager($bdd);
+		$commune = $commune_manager->getCommune($id);
+		$smarty->assign("locations", $location_manager->searchLocationsByCommune($commune->name));
+		$smarty->assign("query",$commune->name);
+		$smarty->assign("referer", $session->getValue("referer"));
+		$smarty->assign("content","locations/search.tpl.html");
+		$smarty->display("main.tpl.html");
+		break;
+
 	case "search_results" :
 		if (strlen($query) > 2) {
 			$smarty->assign("locations", $location_manager->searchLocations($query));
@@ -54,6 +63,7 @@ switch($action) {
 		$smarty->assign("content","locations/search.tpl.html");
 		$smarty->display("main.tpl.html");
 		break;
+
 
 	case "save" :
 		$data = array("id" => $id, "uid" => $uid, "title" => $title, "url" => $url, "image" => $image, "cp" => $cp, "loyer" => $loyer, "surface" => $surface);
@@ -70,18 +80,20 @@ switch($action) {
 		if ($location_manager->deleteLocation($location)) {
 			$log->notification($translate->__('the_location_has_been_deleted'));
 		}
-*/
-		Utils::redirection("locations.php");
+*/		
+		if ($session->getValue("referer")) Utils::redirection($session->getValue("referer"));
+		else Utils::redirection("locations.php?page={$page}");
 		break;
 
 	default:
 		$smarty->assign("titre", $translate->__('list_of_locations'));
-		$rpp = 10;
+		$rpp = 30;
 		if (empty($page)) $page = 1; // Display first page
 		$smarty->assign("locations", $location_manager->getLocationsByPage($page, $rpp));
 		$pagination = new Pagination($page, $location_manager->getMaxLocations(), $rpp);
 		$smarty->assign("btn_nav", $pagination->getNavigation());
-
+		$smarty->assign("page", $page);
+		$session->setValue("referer", "locations.php");
 		$smarty->assign("content", "locations/list.tpl.html");
 		$smarty->display("main.tpl.html");
 }

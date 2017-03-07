@@ -2,23 +2,27 @@
 /**
 * @project		lbc
 * @author		Olivier Gaillard
-* @version		1.0 du 26/02/2017
-* @desc			Objet location
+* @version		1.0 du 06/03/2017
+* @desc			Objet voiture
 */
 
-class Location {
+class Voiture {
 	public $id;
-	public $uid;
 	public $addate;
+	public $uid;
 	public $title;
 	public $url;
 	public $image;
 	public $cp;
 	public $ville;
-	public $loyer;
-	public $surface;
+	public $prix;
+	public $marque;
+	public $modele;
+	public $annee;
+	public $km;
+	public $carburant;
+	public $bv;
 	public $status;
-	public $commune;
 
 
 	public function __construct(array $data) {
@@ -48,19 +52,19 @@ class Location {
 	public function getId() {
 		return $this->id;
 	}
-	// uid;
-	public function setUid($uid) {
-		$this->uid = $uid;
-	}
-	public function getUid() {
-		return $this->uid;
-	}
 	// addate;
 	public function setAddate($addate) {
 		$this->addate = $addate;
 	}
 	public function getAddate() {
 		return $this->addate;
+	}
+	// uid;
+	public function setUid($uid) {
+		$this->uid = $uid;
+	}
+	public function getUid() {
+		return $this->uid;
 	}
 	// title;
 	public function setTitle($title) {
@@ -97,34 +101,63 @@ class Location {
 	public function getVille() {
 		return $this->ville;
 	}
-	// loyer;
-	public function setLoyer($loyer) {
-		$this->loyer = (integer)$loyer;
+	// prix;
+	public function setPrix($prix) {
+		$this->prix = (integer)$prix;
 	}
-	public function getLoyer() {
-		return $this->loyer;
+	public function getPrix() {
+		return $this->prix;
 	}
-	// surface;
-	public function setSurface($surface) {
-		$this->surface = (integer)$surface;
+	// marque;
+	public function setMarque($marque) {
+		$this->marque = $marque;
 	}
-	public function getSurface() {
-		return $this->surface;
+	public function getMarque() {
+		return $this->marque;
 	}
-
+	// modele;
+	public function setModele($modele) {
+		$this->modele = $modele;
+	}
+	public function getModele() {
+		return $this->modele;
+	}
+	// annee;
+	public function setAnnee($annee) {
+		$this->annee = $annee;
+	}
+	public function getAnnee() {
+		return $this->annee;
+	}
+	// km;
+	public function setKm($km) {
+		$this->km = $km;
+	}
+	public function getKm() {
+		return $this->km;
+	}
+	// carburant;
+	public function setCarburant($carburant) {
+		$this->carburant = $carburant;
+	}
+	public function getCarburant() {
+		return $this->carburant;
+	}
+	// bv;
+	public function setBv($bv) {
+		$this->bv = $bv;
+	}
+	public function getBv() {
+		return $this->bv;
+	}
 	// status;
 	public function setStatus($status) {
-		$this->status = (integer)$status;
+		$this->status = $status;
 	}
 	public function getStatus() {
 		return $this->status;
 	}
-	// commune;
-	public function setCommune($commune) {
-		$this->commune = $commune;
-	}
-	public function getCommune() {
-		return $this->commune;
-	}
+
+
 }
 ?>

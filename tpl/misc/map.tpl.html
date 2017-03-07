@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="http://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+<script src="http://openlayers.org/en/v3.19.1/build/ol.js" type="text/javascript"></script>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a href="map.php?action=show_locations" class="btn btn-success btn-xs pull-right" style="margin-left: 6px;">Locations</a> 
+        <a href="map.php?action=show_ventes" class="btn btn-primary btn-xs pull-right">Ventes</a> 
+        <h3 class="panel-title">{$title}</h3>
+      </div>
+      <div class="panel-body">
+        <div id="map" class="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var MapMaker = function() {
+var map;
+var search_link = "{$search_link}";
+var marker_img = "{$marker_img}";
+
+  return {
+      createOSMap: function (lon, lat, zoom) {
+        //a layer for markers - initially it has no markers
+              var markerLayer = new ol.layer.Vector({
+                      source: new ol.source.Vector({ features: [], projection: 'EPSG:4326' })
+              });
+
+        var baseLayer = new ol.layer.Tile( {
+                  source: new ol.source.OSM()
+              });
+
+        map = new ol.Map({
+            target: 'map',  // The DOM element that will contains the map
+            renderer: 'canvas', // Force the renderer to be used
+            layers: [ baseLayer, markerLayer ],
+            // Create a view centered on the specified location and zoom level
+            view: new ol.View({
+                center:  ol.proj.fromLonLat([lon, lat ]),
+                zoom: zoom
+            })
+        });
+
+
+
+        map.on('click', function(e)  {
+           var pixel = map.getEventPixel(e.originalEvent);
+          var hit = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+           window.location.href = search_link + "&id=" + feature.getId();
+          });
+  			});
+
+        // change mouse cursor when over marker
+        var target = map.getTarget();
+        var jTarget = typeof target === "string" ? $("#" + target) : $(target);
+        map.on('pointermove', function(e) {
+          var pixel = map.getEventPixel(e.originalEvent);
+          var hit = map.hasFeatureAtPixel(pixel);
+          jTarget.css("cursor",  hit ? 'pointer' : '');
+      });
+
+      },//ENDOF createOSMap
+
+      addMarker: function(id, name, lon, lat) {
+          //create a point
+          var geom = new ol.geom.Point( ol.proj.fromLonLat([lon, lat]) );
+          var feature = new ol.Feature(geom);
+          feature.setStyle([
+              new ol.style.Style({
+                image: new ol.style.Icon(({
+                        anchor: [0.5, 1],
+                        anchorXUnits: 'fraction',
+                        anchorYUnits: 'fraction',
+                        opacity: 1,
+                        src: 'tpl/assets/img/' + marker_img
+              }))
+              })
+          ]);
+
+          if (id != null) feature.setId(id);
+          map.getLayers().item(1).getSource().addFeature(feature);
+        }
+  }
+}
+
+mymap = MapMaker();
+
+mymap.createOSMap( 3.060484, 45.77412, 10);
+// markers
+{if not empty($markers)}{foreach from=$markers item=m}
+mymap.addMarker({$m.id}, "{$m.name}", {$m.lon}, {$m.lat});  
+{/foreach}
+{/if}
+</script>

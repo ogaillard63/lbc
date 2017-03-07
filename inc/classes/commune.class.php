@@ -2,13 +2,18 @@
 /**
 * @project		lbc
 * @author		Olivier Gaillard
-* @version		1.0 du 26/02/2017
-* @desc			Objet name
+* @version		1.0 du 05/03/2017
+* @desc			Objet commune
 */
 
 class Commune {
+	public $id;
 	public $cp;
 	public $name;
+	public $lat;
+	public $lon;
+	public $distance;
+	public $duration;
 
 
 	public function __construct(array $data) {
@@ -31,6 +36,13 @@ class Commune {
 	}
 
 	/* --- Getters et Setters --- */
+	// id;
+	public function setId($id) {
+		$this->id = (integer)$id;
+	}
+	public function getId() {
+		return $this->id;
+	}
 	// cp;
 	public function setCp($cp) {
 		$this->cp = $cp;
@@ -44,6 +56,34 @@ class Commune {
 	}
 	public function getName() {
 		return $this->name;
+	}
+	// lat;
+	public function setLat($lat) {
+		$this->lat = $lat;
+	}
+	public function getLat() {
+		return $this->lat;
+	}
+	// lon;
+	public function setLon($lon) {
+		$this->lon = $lon;
+	}
+	public function getLon() {
+		return $this->lon;
+	}
+	// distance;
+	public function setDistance($distance) {
+		$this->distance = $distance;
+	}
+	public function getDistance() {
+		return $this->distance;
+	}
+	// duration;
+	public function setDuration($duration) {
+		$this->duration = (integer)$duration;
+	}
+	public function getDuration() {
+		return $this->duration;
 	}
 
 

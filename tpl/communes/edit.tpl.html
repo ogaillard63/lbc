@@ -9,8 +9,28 @@
 					<input name="id" type="hidden" value="{$commune->id}" />
 					<input name="action" type="hidden" value="save" />
 			 <div class="form-group">
+					<label for="{#cp#}">{#cp#|ucfirst}</label>
+					<input class="form-control" type="text" name="cp" value="{$commune->cp}" />
+				</div>
+			 <div class="form-group">
 					<label for="{#name#}">{#name#|ucfirst}</label>
 					<input class="form-control" type="text" name="name" value="{$commune->name}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#lat#}">{#lat#|ucfirst}</label>
+					<input class="form-control" type="text" name="lat" value="{$commune->lat}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#lon#}">{#lon#|ucfirst}</label>
+					<input class="form-control" type="text" name="lon" value="{$commune->lon}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#distance#}">{#distance#|ucfirst}</label>
+					<input class="form-control" type="text" name="distance" value="{$commune->distance}" />
+				</div>
+			 <div class="form-group">
+					<label for="{#duration#}">{#duration#|ucfirst}</label>
+					<input class="form-control" type="text" name="duration" value="{$commune->duration}" />
 				</div>
 
 					<div align="right">

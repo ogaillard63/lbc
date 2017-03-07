@@ -5,7 +5,7 @@
 				<h3 class="panel-title">{#search#|ucfirst}</h3>
 			</div>
 			<div class="panel-body">
-				<form role="form" name="form_param" method="post" action="locations.php" class="search_form">
+				<form role="form" name="form_param" method="post" action="ventes.php" class="search_form">
 					<div class="input-group">
 						<input class="form-control" type="hidden" name="action" value="search_results" />
 						<input class="form-control" type="text" name="query" value="{if not empty($query)}{$query}{/if}" />
@@ -16,7 +16,7 @@
 				</form>
 			</div>
 		</div>
-		{if not empty($locations)}
+		{if not empty($ventes)}
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">{#search_results#|ucfirst}</h3>
@@ -26,33 +26,33 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				{if not empty($locations)}
+				{if not empty($ventes)}
 				 <div class="row">
-            {foreach from=$locations item=location}
+            {foreach from=$ventes item=vente}
 			<div class="col-md-4">
 				<div class="portfolio-item">
 					<p class="thumb">
-					<a href="{$location->url}" target="_blank">
-						{if $location->image}<img src="{$location->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
+					<a href="{$vente->url}" target="_blank">
+						{if $vente->image}<img src="{$vente->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
 					</a>
 					</p>
 					<h4>
-						<a href="{$location->url}" target="_blank">{$location->title}</a>
+						<a href="{$vente->url}" target="_blank">{$vente->title}</a>
 					</h4>
-					<p><a href="https://www.google.fr/maps/place/{$location->cp}+{$location->ville}" target="_blank">{$location->ville}</a></p>
-					<p><span class="label label-primary">{$location->loyer}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$location->surface}&nbsp;m2</span>&nbsp;<span class="label label-warning">{($location->commune->duration/60)|number_format:0:".":" "}&nbsp;min</span>&nbsp;<span class="label label-info">{$location->commune->distance|number_format:1:".":" "}&nbsp;km</span></p>
-					<p>{$location->addate|date_format:"%d/%m/%Y %H:%M"}<a href="locations.php?action=delete&id={$location->id}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
+					<p><a href="https://www.google.fr/maps/place/{$vente->cp}+{$vente->ville}" target="_blank">{$vente->commune->name}</a></p>
+					<p><span class="label label-primary">{$vente->prix}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$vente->surface}&nbsp;m2</span>&nbsp;<span class="label label-warning">{($vente->commune->duration/60)|number_format:0:".":" "}&nbsp;min</span>&nbsp;<span class="label label-info">{$vente->commune->distance|number_format:1:".":" "}&nbsp;km</span></p>
+					<p>{$vente->addate|date_format:"%d/%m/%Y %H:%M"}<a href="ventes.php?action=delete&id={$vente->id}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
             	</div>
             </div>
-           {if $location@iteration is div by 3}</div>
+           {if $vente@iteration is div by 3}</div>
 		   <div class="row">{/if}
 		   {/foreach}
         </div>
-			{else}<h4>{#no_location#}</h4>{/if}
+			{else}<h4>{#no_vente#}</h4>{/if}
 			<div class="panel-footer">
 				<ul class="pagination">
 					{if not empty($btn_nav)} {foreach from=$btn_nav item=btn}
-					<li{if $btn.active} class="active" {/if}><a href="locations.php?{$btn.link}">{$btn.label}</a></li>
+					<li{if $btn.active} class="active" {/if}><a href="ventes.php?{$btn.link}">{$btn.label}</a></li>
 						{/foreach}{/if}
 				</ul>
 				{if (isset($referer))}<div class="btn-group pull-right">

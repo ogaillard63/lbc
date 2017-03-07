@@ -2,37 +2,30 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<a href="locations.php?action=search" class="btn btn-xs btn-success pull-right">{#search#|ucfirst}</a>
 				<h3 class="panel-title">{#list_of_locations#|ucfirst}</h3>
 			</div>
 			<div class="panel-body">
-				{if not empty($locations)}<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>{#date#|ucfirst}</th>
-						<th>{#title#|ucfirst}</th>
-						<th>{#image#|ucfirst}</th>
-						<th>{#cp#|ucfirst}</th>
-						<th>{#ville#|ucfirst}</th>
-						<th>{#loyer#|ucfirst}</th>
-						<th>{#surface#|ucfirst}</th>
-						<th>{#actions#|ucfirst}</th>
-					</tr>
-				</thead>
-				<tbody>
-					{foreach from=$locations item=location}
-					<tr>
-						<td align="center">{$location->addate|date_format:"%d/%m/%Y <br/> %H:%M"}</td>
-						<td align="left"><a href="{$location->url}" target="_blank">{$location->title}</a></td>
-						<td align="left"><img src="{$location->image}" width="200"></td>
-						<td align="left"><a href="https://www.google.fr/maps/place/{$location->cp}" target="_blank">{$location->cp}</a></td>
-						<td align="left"><a href="https://www.google.fr/maps/place/{$location->cp}" target="_blank">{$location->ville}</a></td>
-						<td align="left">{$location->loyer}</td>
-						<td align="left">{$location->surface}</td>
-						<td width="1%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-danger" href="locations.php?action=delete&id={$location->id}" title="{#delete#|ucfirst}" onclick="return confirm('{#do_you_really_want_to_delete_this_location#|ucfirst} ?')">{#delete#|ucfirst}</a></td>
-					</tr>
-					{/foreach}
-				</tbody>
-			</table>
+				{if not empty($locations)}
+				 <div class="row">
+            {foreach from=$locations item=location}
+			<div class="col-md-4">
+				<div class="portfolio-item">
+					<h4><a href="{$location->url}" target="_blank">{$location->title}</a></h4>
+					<p class="thumb">
+						<a href="{$location->url}" target="_blank">
+							{if $location->image}<img src="{$location->image}" height="180"/>{else}<img src="tpl/assets/img/nopicture.jpg" height="180"/>{/if}
+						</a>
+					</p>
+					<p><a href="https://www.google.fr/maps/place/{$location->cp}+{$location->ville}" target="_blank">{$location->ville}</a></p>
+					<p><span class="label label-primary">{$location->loyer}&nbsp;&euro;</span>&nbsp;<span class="label label-success">{$location->surface}&nbsp;m2</span>&nbsp;<span class="label label-warning">{($location->commune->duration/60)|number_format:0:".":" "}&nbsp;min</span>&nbsp;<span class="label label-info">{$location->commune->distance|number_format:1:".":" "}&nbsp;km</span></p>
+					<p>{$location->addate|date_format:"%d/%m/%Y %H:%M"}<a href="locations.php?action=delete&id={$location->id}&page={$page}" class="btn btn-danger btn-sm pull-right" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
+            	</div>
+            </div>
+           {if $location@iteration is div by 3}</div>
+		   <div class="row">{/if}
+		   {/foreach}
+        </div>
 			{else}<h4>{#no_location#}</h4>{/if}
 			<div class="panel-footer">
 				<ul class="pagination">
@@ -40,10 +33,6 @@
 					<li{if $btn.active} class="active" {/if}><a href="locations.php?{$btn.link}">{$btn.label}</a></li>
 						{/foreach}{/if}
 				</ul>
-				<div class="btn-group pull-right">
-					<a href="locations.php?action=search" class="btn btn-success">{#search#|ucfirst}</a>
-					<!--<a href="locations.php?action=add" class="btn btn-primary">{#add_a_location#|ucfirst}</a>-->
-				</div>
 			</div>
 		</div>
 	</div>

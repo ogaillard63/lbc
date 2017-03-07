@@ -3,10 +3,10 @@
 * @project		lbc
 * @author		Olivier Gaillard
 * @version		1.0 du 26/02/2017
-* @desc			Objet location
+* @desc			Objet vente
 */
 
-class Location {
+class Vente {
 	public $id;
 	public $uid;
 	public $addate;
@@ -15,7 +15,7 @@ class Location {
 	public $image;
 	public $cp;
 	public $ville;
-	public $loyer;
+	public $prix;
 	public $surface;
 	public $status;
 	public $commune;
@@ -97,12 +97,12 @@ class Location {
 	public function getVille() {
 		return $this->ville;
 	}
-	// loyer;
-	public function setLoyer($loyer) {
-		$this->loyer = (integer)$loyer;
+	// prix;
+	public function setPrix($prix) {
+		$this->prix = (integer)$prix;
 	}
-	public function getLoyer() {
-		return $this->loyer;
+	public function getPrix() {
+		return $this->prix;
 	}
 	// surface;
 	public function setSurface($surface) {

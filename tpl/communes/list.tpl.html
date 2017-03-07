@@ -8,16 +8,26 @@
 				{if not empty($communes)}<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>{#commune#|ucfirst}</th>
+						<th>{#cp#|ucfirst}</th>
+						<th>{#name#|ucfirst}</th>
+						<th>{#lat#|ucfirst}</th>
+						<th>{#lon#|ucfirst}</th>
+						<th>{#distance#|ucfirst}</th>
+						<th>{#duration#|ucfirst}</th>
 						<th colspan="2">{#actions#|ucfirst}</th>
 					</tr>
 				</thead>
 				<tbody>
 					{foreach from=$communes item=commune}
 					<tr>
-						<td width="80%"  align="left">{$commune->name}</td>
-						<td width="10%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-success" href="communes.php?action=edit&cp={$commune->cp}" title="{#edit#|ucfirst}">{#edit#|ucfirst}</a></td>
-						<td width="10%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-danger" href="communes.php?action=delete&cp={$commune->cp}" title="{#delete#|ucfirst}" onclick="return confirm('{#do_you_really_want_to_delete_this_commune#|ucfirst} ?')">{#delete#|ucfirst}</a></td>
+						<td align="left">{$commune->cp}</td>
+						<td align="left">{$commune->name}</td>
+						<td align="left">{$commune->lat}</td>
+						<td align="left">{$commune->lon}</td>
+						<td align="left">{$commune->distance}</td>
+						<td align="left">{$commune->duration}</td>
+						<td width="1%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-success" href="communes.php?action=edit&id={$commune->id}" title="{#edit#|ucfirst}">{#edit#|ucfirst}</a></td>
+						<td width="1%" align="center" nowrap="nowrap"><a class="btn btn-sm btn-danger" href="communes.php?action=delete&id={$commune->id}" title="{#delete#|ucfirst}" onclick="return confirm('{#do_you_really_want_to_delete_this_commune#|ucfirst} ?')">{#delete#|ucfirst}</a></td>
 					</tr>
 					{/foreach}
 				</tbody>
@@ -30,6 +40,7 @@
 						{/foreach}{/if}
 				</ul>
 				<div class="btn-group pull-right">
+					<a href="communes.php?action=search" class="btn btn-success">{#search#|ucfirst}</a>
 					<a href="communes.php?action=add" class="btn btn-primary">{#add_a_commune#|ucfirst}</a>
 				</div>
 			</div>
