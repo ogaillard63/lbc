@@ -1,4 +1,8 @@
-/inc/properties/
-/tpl_cache
-/vendor
-/.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+inc/properties/*
+tpl_cache/*
+vendor/*
