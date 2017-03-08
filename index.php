@@ -122,6 +122,10 @@ switch($action) {
         }
 
 		break;
+
+// velo
+// https://www.leboncoin.fr/velos/offres/auvergne/puy_de_dome/?th=1&q=-enfant%20-selle%20-derailleur%20-%2216%20pouces%22%20-chaussures%20-protections%20-lunettes%20-draisienne%20-porte%20-elliptique%20-trotinette%20-trottinette&it=1&parrot=0&ps=2&pe=8
+// https://www.leboncoin.fr/velos/offres/auvergne/puy_de_dome/?th=1&q=%20V.T.T%20OR%20%20vtt%20OR%20decathlon%20OR%20VTC%20-enfant%20-gar%E7on%20-fille%20-fillette%20-chaussure%20-draisienne%20-elliptique%20-siege%20-cintre%20-pneu%20-casque&it=1&parrot=0&ps=2&pe=8
 }
 
 
