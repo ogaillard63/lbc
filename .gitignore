@@ -6,3 +6,4 @@
 inc/properties/*
 tpl_cache/*
 vendor/*
+dumps/*
