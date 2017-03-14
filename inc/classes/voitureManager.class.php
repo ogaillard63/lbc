@@ -41,12 +41,12 @@ class VoitureManager {
 	public function getVoitures($offset = null, $count = null) {
 		$voitures = array();
 		if (isset($offset) && isset($count)) {
-			$q = $this->bdd->prepare('SELECT * FROM voitures ORDER BY id DESC LIMIT :offset, :count');
+			$q = $this->bdd->prepare('SELECT * FROM voitures WHERE status = "1" ORDER BY id DESC LIMIT :offset, :count');
 			$q->bindValue(':offset', $offset, PDO::PARAM_INT);
 			$q->bindValue(':count', $count, PDO::PARAM_INT);
 		}
 		else {
-			$q = $this->bdd->prepare('SELECT * FROM voitures ORDER BY id');
+			$q = $this->bdd->prepare('SELECT * FROM voitures WHERE status = "1"  ORDER BY id');
 		}
 
 		$q->execute();
@@ -68,7 +68,7 @@ class VoitureManager {
 	public function searchVoitures($query) {
 		$voitures = array();
 		$q = $this->bdd->prepare('SELECT * FROM voitures 
-			WHERE title LIKE :query OR cp LIKE :query OR ville LIKE :query 
+			WHERE status = "1" AND title LIKE :query OR cp LIKE :query OR ville LIKE :query 
 			OR marque LIKE :query OR modele LIKE :query OR annee LIKE :query 
 			OR km LIKE :query OR carburant LIKE :query OR bv LIKE :query');
 		$q->bindValue(':query', '%'.$query.'%', PDO::PARAM_STR);
@@ -83,7 +83,7 @@ class VoitureManager {
 	 * Retourne le nombre max de voitures
 	 */
 	public function getMaxVoitures() {
-		$q = $this->bdd->prepare('SELECT count(1) FROM voitures');
+		$q = $this->bdd->prepare('SELECT count(1) FROM voitures WHERE status = "1"');
 		$q->execute();
 		return intval($q->fetch(PDO::FETCH_COLUMN));
 	}
@@ -138,19 +138,6 @@ class VoitureManager {
 
 		$q->execute();
 		if ($voiture->getId() == -1) $voiture->setId($this->bdd->lastInsertId());
-	}
-
-	/**
-	 * Retourne une liste des voitures formatés pour peupler un menu déroulant
-	 */
-	public function getVoituresForSelect() {
-		$voitures = array();
-		$q = $this->bdd->prepare('SELECT id, name FROM voitures ORDER BY id');
-		$q->execute();
-		while ($row = $q->fetch(PDO::FETCH_ASSOC)) {
-			$voitures[$row["id"]] =  $row["name"];
-		}
-		return $voitures;
 	}
 }
 ?>
