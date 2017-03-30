@@ -3,7 +3,7 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-inc/properties/*
 tpl_cache/*
 vendor/*
 dumps/*
+composer.lock

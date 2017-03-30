@@ -1,0 +1,7 @@
+{
+    "name": "ogaillard/lbc",
+    "description": "Recherche auto LBC",
+    "require": {
+        "smarty/smarty": "^3.1"
+    }
+}
